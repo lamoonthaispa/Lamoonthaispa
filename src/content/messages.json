@@ -149,7 +149,130 @@
   },
 
   "services_detail": {
+    "massage": {
+      "hero": {
+        "title": "Massage Thaïlandais à Paris : Une Invitation à la Détente",
+        "description": [
+          { "type": "text", "value": "Bienvenue chez " },
+          { "type": "highlight", "value": "LAMOON THAI SPA, " },
+          { "type": "text", "value": "votre refuge de sérénité au cœur de la capitale. Nous vous proposons une expérience unique de " },
+          { "type": "highlight", "value": "massage thaïlandais à Paris, " },
+          { "type": "text", "value": "alliant tradition, relaxation et bien-être." }
+        ],
+        "image": "/images/massage.jpg",
+        "book": "Réserver"
+      },
+      "benefits_section": {
+        "benefits": [
+          { "icon": "RelaxingProcedureIcon", "label": "Relâcher les tensions musculaires." },
+          { "icon": "MeditationIcon", "label": "Améliorer la circulation énergétique." },
+          { "icon": "SpaIcon", "label": "Apporter une relaxation profonde et durable." }
+        ],
+        "info_title": "Qu’est-ce que le massage thaïlandais ?",
+        "info_description": "Le massage thaïlandais, ou « Nuad Thai », est une pratique ancestrale qui associe pressions, étirements et mouvements fluides. Inspiré des principes de l’acupression et du yoga, ce soin complet"
+      },
+      "formulas_section": {
+        "title": "Nos formules de massage thaïlandais",
+        "description": "Chez LAMOON THAI SPA, nous proposons une large gamme de massages pour répondre à toutes vos envies et besoins. Découvrez nos prestations"
+      }
+    },
 
+    "gommage": {
+      "hero": {
+        "title": "Gommage Corps à Paris : Douceur et Éclat pour Votre Peau",
+        "description": [
+          { "type": "text", "value": "Chez LAMOON THAI SPA, nous vous proposons une expérience unique de gommage corps à Paris. Ce rituel, alliant exfoliation et détente, est conçu pour révéler la beauté naturelle de votre peau tout en vous offrant un moment de relaxation inoubliable." }
+        ],
+        "image": "/images/gommage.png",
+        "book": "Réserver"
+      },
+      "benefits_section": {
+        "benefits": [
+          { "icon": "WaterDropIcon", "label": "Élimine les cellules mortes et impuretés accumulées." },
+          { "icon": "WaxIcon", "label": "Stimule le renouvellement cellulaire pour un teint unifié et lumineux." },
+          { "icon": "LeafIcon", "label": "Prépare votre peau à absorber pleinement les soins hydratants." }
+        ],
+        "info_title": "Pourquoi opter pour un gommage corps ?",
+        "info_description": "Que ce soit pour préparer votre peau aux changements de saison ou simplement vous offrir un instant de bien-être, notre gommage corporel est votre allié idéal. Sa texture fondante et ses ingrédients naturels laissent la peau douce, lisse et délicatement parfumée."
+      },
+      "formulas_section": {
+        "title": "Nos formules de gommage corps",
+        "description": "Chez LAMOON THAI SPA, nous mettons notre expertise à votre service pour une prestation adaptée à vos besoins. Nos produits naturels et notre ambiance chaleureuse vous garantissent un moment de sérénité unique."
+      }
+    },
+
+    "teinture": {
+      "hero": {
+        "title": "Teinture des Cils et Sourcils à Paris : Sublimez Votre Regard avec LAMOON THAI SPA",
+        "description": [
+          { "type": "text", "value": "Chez LAMOON THAI SPA, nous vous proposons une prestation de teinture des cils et sourcils à Paris qui met en valeur votre regard de manière naturelle et élégante. La teinture permet de définir vos cils et sourcils en profondeur, offrant un effet maquillage longue durée. Idéale pour celles qui souhaitent gagner du temps ou obtenir un regard plus intense sans avoir à recourir à du maquillage quotidien." }
+        ],
+        "image": "/images/teinture.png",
+        "book": "Réserver"
+      },
+      "benefits_section": {
+        "benefits": [
+          { "icon": "MakeUpBrushesIcon", "label": "La teinture accentue la couleur naturelle de vos cils et sourcils, créant un regard plus intense et un résultat plus net." },
+          { "icon": "TimeAddIcon", "label": "Plus besoin de maquiller vos cils et sourcils tous les jours. La teinture vous permet de gagner du temps tout en ayant un regard parfait à tout moment." },
+          { "icon": "LeafIcon", "label": "Contrairement au maquillage traditionnel, la teinture offre un résultat discret et naturel, tout en intensifiant la couleur." },
+          { "icon": "GiveLoveKindnessIcon", "label": "Qu’ils soient clairs ou foncés, nos produits professionnels s’adaptent parfaitement à vos besoins pour un résultat personnalisé." }
+        ],
+        "info_title": "Pourquoi opter pour la teinture des cils et sourcils à Paris ?",
+        "info_description": "Chez LAMOON THAI SPA, nous utilisons des produits de haute qualité, spécialement conçus pour offrir une teinture longue durée, tout en respectant la santé de vos cils et sourcils. Nos esthéticiennes qualifiées vous guideront tout au long du processus pour garantir un résultat qui correspond à vos attentes. \nQue ce soit pour une teinture des cils qui donne un effet mascara naturel ou une teinture des sourcils pour une forme plus définie, nous vous offrons un service sur mesure pour sublimer votre regard."
+      },
+      "formulas_section": {
+        "title": "Nos prestations de teinture des cils et sourcils",
+        "description": "Faites confiance à notre expertise pour obtenir des cils et sourcils parfaitement teintés dans un cadre apaisant. Avec LAMOON THAI SPA, vous bénéficiez d’une prestation professionnelle qui valorise vos traits et vous assure un regard éclatant de beauté."
+      }
+    },
+
+    "cire-orientae": {
+      "hero": {
+        "title": "Epilation cire orientale (Sucre) à Paris : Naturelle et Douce",
+        "description": [
+          { "type": "text", "value": "Chez LAMOON THAI SPA, nous vous invitons à découvrir les bienfaits de l’épilation à la cire orientale à Paris, une technique traditionnelle reconnue pour son efficacité et sa douceur. Conçue à partir d’ingrédients 100 % naturels, cette méthode d’épilation ancestrale est idéale pour toutes les zones du corps et s’adresse particulièrement aux peaux sensibles." }
+        ],
+        "image": "/images/cire-orientae.png",
+        "book": "Réserver"
+      },
+      "benefits_section": {
+        "benefits": [
+          { "icon": "LeafIcon", "label": "Sans produits chimiques, elle respecte votre peau et l’environnement." },
+          { "icon": "WaxIcon", "label": "Élimine les poils à la racine, laissant votre peau lisse plus longtemps." },
+          { "icon": "FeatherIcon", "label": "Convient aux zones les plus sensibles, comme le visage et le maillot." }
+        ],
+        "info_title": "Qu’est-ce que la cire orientale ?",
+        "info_description": "L’épilation à la cire orientale, également connue sous le nom d’épilation au sucre, est une méthode naturelle utilisée depuis des siècles au Moyen-Orient. Préparée à base de sucre, de citron et d’eau, cette cire offre une alternative plus douce et respectueuse comparée aux cires classiques."
+      },
+      "formulas_section": {
+        "title": "Zones traitées avec la cire orientale",
+        "description": "L’épilation à la cire orientale convient à toutes les zones du corps."
+      }
+    },
+
+    "soin-du-visage": {
+      "hero": {
+        "title": "Soins du Visage à Paris : Un Soin de Beauté et de Détente pour Votre Peau",
+        "description": [
+          { "type": "text", "value": "Chez LAMOON THAI SPA, nous vous invitons à découvrir une expérience unique de soins du visage à Paris. Nos soins sont spécialement conçus pour nourrir et revitaliser votre peau tout en vous offrant un moment de relaxation absolue. Grâce à des techniques professionnelles et des produits haut de gamme, vous bénéficierez d’un soin sur mesure pour un teint lumineux et une peau éclatante." }
+        ],
+        "image": "/images/soin-du-visage.png",
+        "book": "Réserver"
+      },
+      "benefits_section": {
+        "benefits": [
+          { "icon": "WaterDropIcon", "label": "Laisse votre peau douce, souple et profondément nourrie." },
+          { "icon": "SkincareIcon", "label": "Atténue les rides et ridules, pour une peau plus lisse et plus jeune." },
+          { "icon": "LeafIcon", "label": "Grâce à des soins ciblés, votre peau retrouve toute sa fraîcheur et sa luminosité." }
+        ],
+        "info_title": "Pourquoi choisir un soin du visage ?",
+        "info_description": "Que vous ayez besoin de réparer une peau sèche, de lutter contre les signes de fatigue ou d’offrir à votre peau un moment de bien-être, nos soins du visage à Paris répondent à toutes vos attentes."
+      },
+      "formulas_section": {
+        "title": "Nos formules de soins du visage",
+        "description": "Chez LAMOON THAI SPA, chaque soin est une expérience personnalisée. Nous utilisons des produits naturels et des techniques adaptées à votre type de peau pour garantir les meilleurs résultats. Nos soins sont conçus pour vous offrir une peau éclatante et revitalisée, tout en vous offrant un moment de relaxation profond."
+      }
+    }
   },
 
   "footer": {
