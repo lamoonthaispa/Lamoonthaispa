@@ -64,6 +64,8 @@ button {
   --color-service-detail-text-description: #7A6A55;
   --color-service-detail-benefits-icon: #4F3921;
   --color-service-detail-benefits-text: #7A6A55;
+  --color-service-detail-button-background: "#4F3921";
+  --color-service-detail-button-text: "#F6F1EA";
 
   /* Footer colors */
   --color-footer-background: #4F3921;
