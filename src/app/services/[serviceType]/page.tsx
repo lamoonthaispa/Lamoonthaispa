@@ -12,7 +12,7 @@ type ServiceParams = {
   params: { serviceType: ServiceType };
 };
 
-export async function generateMetadata({ params }: ServiceParams): Metadata {
+export async function generateMetadata({ params }: ServiceParams): Promise<Metadata> {
   const metadata = SERVICE_PAGE_METADATA[params.serviceType];
   const { serviceType } = await params;
   if (!metadata) {
