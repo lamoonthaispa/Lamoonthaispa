@@ -64,9 +64,15 @@ export default function CalendarView({
 
   // Fetch booked slots for the current week from backend
   useEffect(() => {
+    // Skip fetch during build
+    if (typeof window === "undefined") {
+      setFetchedBookedSlots({});
+      return;
+    }
+  
     let cancelled = false;
     const controller = new AbortController();
-
+  
     const fetchSlots = async () => {
       setIsLoadingSlots(true);
       setSlotsError(null);
@@ -76,20 +82,20 @@ export default function CalendarView({
         start.setHours(0, 0, 0, 0);
         const end = new Date(week[6]);
         end.setHours(23, 59, 59, 999);
-
+  
         const params = new URLSearchParams({
           start: start.toISOString(),
           end: end.toISOString(),
         });
-
+  
         const res = await fetch(`/api/bookings/slots?${params.toString()}`, {
           signal: controller.signal,
         });
         if (!res.ok) throw new Error('Failed to load slots');
         const data = await res.json();
-
+  
         if (cancelled) return;
-
+  
         if (Array.isArray(data)) {
           const normalized = data.map(b => ({ slot: b.slot, duration: b.duration }));
           setFetchedBookedSlots(normalized);
@@ -106,9 +112,9 @@ export default function CalendarView({
         setIsLoadingSlots(false);
       }
     };
-
+  
     fetchSlots();
-
+  
     return () => {
       cancelled = true;
       controller.abort();
@@ -151,8 +157,27 @@ export default function CalendarView({
       return { count, isBooked, isFull, isPast, isTooLate };
     }
 
-    const map = Object.keys(fetchedBookedSlots).length ? fetchedBookedSlots : bookedSlots;
-    const count = map[date.toISOString()] || 0;
+    let count = 0;
+if (Array.isArray(fetchedBookedSlots) && fetchedBookedSlots.length > 0) {
+  // Handle array format
+  const slotStart = new Date(date);
+  const slotEnd = new Date(slotStart.getTime() + selectedDuration * 60 * 1000);
+  for (const b of fetchedBookedSlots) {
+    if (!b || !b.slot) continue;
+    const bookingStart = new Date(b.slot);
+    const bookingDuration = Number(b.duration) || 0;
+    const bookingEnd = new Date(bookingStart.getTime() + bookingDuration * 60 * 1000);
+    if (bookingStart < slotEnd && bookingEnd > slotStart) {
+      count += 1;
+    }
+  }
+} else if (fetchedBookedSlots && typeof fetchedBookedSlots === 'object' && !Array.isArray(fetchedBookedSlots)) {
+  // Handle object format
+  count = fetchedBookedSlots[date.toISOString()] || 0;
+} else {
+  // Fallback to bookedSlots prop
+  count = bookedSlots[date.toISOString()] || 0;
+}
     const slotStart = new Date(date);
     const slotEnd = new Date(slotStart.getTime() + selectedDuration * 60 * 1000);
     const isPast = slotEnd <= now;
