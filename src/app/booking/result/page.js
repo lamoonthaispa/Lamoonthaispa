@@ -1,20 +1,19 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { CheckCircle, XCircle } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
-export default function BookingResultPage() {
+function BookingResultContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
   const result = searchParams.get("checkout_result") || searchParams.get("result");
   const order_id = searchParams.get("order_id");
 
-  // Extract booking data from URL params
   const bookingDataFromParams = {
     booking: {
       slot: searchParams.get("slot"),
@@ -25,7 +24,7 @@ export default function BookingResultPage() {
       phone: searchParams.get("phone"),
     },
     payment: {
-      order_id: order_id,
+      order_id,
       fullname: searchParams.get("name"),
       status: "Confirmé",
     },
@@ -34,22 +33,19 @@ export default function BookingResultPage() {
   const [status, setStatus] = useState<"loading" | "success" | "fail">("loading");
   const [bookingData, setBookingData] = useState<any>(null);
 
-  // Helper: Safe date formatting
-  const formatDate = (iso) => {
-    if (!iso) return "—";
-    const date = new Date(iso);
-    return !isNaN(date.getTime()) ? date.toLocaleDateString("fr-FR") : "—";
-  };
-
-  const formatTime = (iso) => {
-    if (!iso) return "—";
-    const date = new Date(iso);
-    return !isNaN(date.getTime())
-      ? date.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })
+  const formatDate = (iso) =>
+    iso && !isNaN(new Date(iso).getTime())
+      ? new Date(iso).toLocaleDateString("fr-FR")
       : "—";
-  };
 
-  // Set status based on result
+  const formatTime = (iso) =>
+    iso && !isNaN(new Date(iso).getTime())
+      ? new Date(iso).toLocaleTimeString("fr-FR", {
+          hour: "2-digit",
+          minute: "2-digit",
+        })
+      : "—";
+
   useEffect(() => {
     if (result === "success") {
       setStatus("success");
@@ -59,17 +55,13 @@ export default function BookingResultPage() {
     }
   }, [result]);
 
-  // Auto-redirect after 10 seconds on success
   useEffect(() => {
     if (status === "success") {
-      const timer = setTimeout(() => {
-        router.push("/");
-      }, 10000);
+      const timer = setTimeout(() => router.push("/"), 10000);
       return () => clearTimeout(timer);
     }
   }, [status, router]);
 
-  // Loading state
   if (status === "loading") {
     return (
       <div className="min-h-screen bg-[#FBF6EF] flex items-center justify-center">
@@ -78,7 +70,6 @@ export default function BookingResultPage() {
     );
   }
 
-  // Fail state
   if (status === "fail") {
     return (
       <div className="min-h-screen bg-[#FBF6EF] flex flex-col items-center justify-between">
@@ -108,7 +99,6 @@ export default function BookingResultPage() {
     );
   }
 
-  // Success state
   const { booking, payment } = bookingData;
 
   return (
@@ -120,7 +110,6 @@ export default function BookingResultPage() {
               <CheckCircle className="w-12 h-12 text-green-600" />
             </div>
           </div>
-
           <h1 className="text-2xl sm:text-3xl font-semibold text-[#3C2A17] mb-2">
             Votre réservation a été confirmée.
           </h1>
@@ -142,30 +131,14 @@ export default function BookingResultPage() {
               </div>
               <div className="p-4 sm:p-6 flex-1 text-sm sm:text-base text-[#4F3921] space-y-1">
                 <p className="font-medium mb-2">#{payment.order_id || "—"}</p>
-                <p>
-                  <span className="font-semibold">Massage :</span> {booking.massageType || "—"}
-                </p>
-                <p>
-                  <span className="font-semibold">Client :</span> {booking.name || payment.fullname || "—"}
-                </p>
-                <p>
-                  <span className="font-semibold">Date :</span> {formatDate(booking.slot)}
-                </p>
-                <p>
-                  <span className="font-semibold">Heure :</span> {formatTime(booking.slot)}
-                </p>
-                <p>
-                  <span className="font-semibold">E-mail :</span> {booking.email || "—"}
-                </p>
-                <p>
-                  <span className="font-semibold">Téléphone :</span> {booking.phone || "—"}
-                </p>
-                <p>
-                  <span className="font-semibold">Paiement :</span> Carte bancaire
-                </p>
-                <p>
-                  <span className="font-semibold">Statut :</span> {payment.status || "Confirmé"}
-                </p>
+                <p><span className="font-semibold">Massage :</span> {booking.massageType || "—"}</p>
+                <p><span className="font-semibold">Client :</span> {booking.name || payment.fullname || "—"}</p>
+                <p><span className="font-semibold">Date :</span> {formatDate(booking.slot)}</p>
+                <p><span className="font-semibold">Heure :</span> {formatTime(booking.slot)}</p>
+                <p><span className="font-semibold">E-mail :</span> {booking.email || "—"}</p>
+                <p><span className="font-semibold">Téléphone :</span> {booking.phone || "—"}</p>
+                <p><span className="font-semibold">Paiement :</span> Carte bancaire</p>
+                <p><span className="font-semibold">Statut :</span> {payment.status || "Confirmé"}</p>
               </div>
             </div>
           </div>
@@ -180,6 +153,21 @@ export default function BookingResultPage() {
       </div>
       <Footer />
     </div>
+  );
+}
+
+// Page wrapper with Suspense
+export default function BookingResultPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-[#FBF6EF] flex items-center justify-center">
+          <p className="text-[#4F3921] animate-pulse">Chargement...</p>
+        </div>
+      }
+    >
+      <BookingResultContent />
+    </Suspense>
   );
 }
 
