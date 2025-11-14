@@ -4,14 +4,16 @@ import Divider from "./Divider";
 export default function Services() {
   const services = messages.landing.services
   const buttonText = services.button
+  const href = services.href
 
   const serviceEntries = Object.entries(services)
-    .filter(([key]) => key !== 'button')
+    .filter(([key]) => key !== 'button' && key !== 'href')
     .map(([key, serviceData]) => {
       const service = serviceData as {
         title: string;
         description: { type: string; value: string }[];
         image: string;
+        slug: string;
       };
       return { key, service };
     });
@@ -30,6 +32,7 @@ export default function Services() {
           image={service.image}
           reverse={index % 2 === 0}
           buttonText={buttonText}
+          href={href + service.slug}
         />
       ))}
     </section>

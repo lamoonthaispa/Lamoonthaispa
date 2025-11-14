@@ -7,7 +7,8 @@ export default function ServiceHighlight({
   description,
   image,
   reverse = false,
-  buttonText
+  buttonText,
+  href
 }: {
   title: string;
   description: {
@@ -17,6 +18,7 @@ export default function ServiceHighlight({
   image: string;
   reverse: boolean;
   buttonText: string;
+  href:string;
 }) {
   return (
     <article
@@ -53,10 +55,10 @@ export default function ServiceHighlight({
           })}
         </p>
 
-        <button className="rounded-[5.26px] py-3 md:max-w-[163px] flex justify-center items-center gap-3 text-landing-services-button-text bg-landing-services-button-background">
+        <a href={href} className="rounded-[5.26px] py-3 md:max-w-[163px] flex justify-center items-center gap-3 text-landing-services-button-text bg-landing-services-button-background">
           { buttonText }
           <ArrowRight size={20} />
-        </button>
+        </a>
       </div>
 
     </article>

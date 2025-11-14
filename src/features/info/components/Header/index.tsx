@@ -1,5 +1,4 @@
 import messages from '@/content/messages.json'
-import SearchBox from './SearchBox'
 export default function Header() {
   const info = messages.info
   return (
@@ -8,7 +7,6 @@ export default function Header() {
         { info.title }
       </h1>
 
-      <SearchBox />
     </header>
   )
 }

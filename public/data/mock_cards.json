@@ -60,9 +60,19 @@
     }
   },
   {
+    "title": "Abonnements massage",
+    "description": "Détendez régulièrement votre cou, épaules et cuir chevelu, et libérez le stress quotidien grâce à nos abonnements massage.",
+    "type": "Massages",
+    "prices": {
+      "5h": 350,
+      "10h": 590,
+      "15h": null
+    }
+  },
+  {
     "title": "Gommages accompagné d'un massage",
     "description": "",
-    "type": "Gommages",
+    "type": "Nos Gommages",
     "prices": {
       "30m": null,
       "1h": 99,
@@ -72,7 +82,7 @@
   {
     "title": "Gommages Fruits exotiques | Sel de Guérande | Sucre rose de Damas",
     "description": "",
-    "type": "Gommages",
+    "type": "Nos Gommages",
     "prices": {
       "30m": 55,
       "1h": null,
@@ -82,7 +92,7 @@
   {
     "title": "Soin contours des yeux",
     "description": "Hydratant et illuminateur, pour une peau douce et éclatante",
-    "type": "Soins du visage",
+    "type": "Nos Soins du visage",
     "prices": {
       "30m": 55,
       "1h": null,
@@ -92,7 +102,7 @@
   {
     "title": "Soin signature Lamoon",
     "description": "Purifiant et hydratant, pour tout types de peau",
-    "type": "Soins du visage",
+    "type": "Nos Soins du visage",
     "prices": {
       "30m": null,
       "45m": 65,
@@ -103,7 +113,7 @@
   {
     "title": "Soin douceur de rose",
     "description": "Rituel éclatant pour tout types de peau",
-    "type": "Soins du visage",
+    "type": "Nos Soins du visage",
     "prices": {
       "30m": null,
       "1h": 72,
@@ -113,7 +123,7 @@
   {
     "title": "Soin sublime argan",
     "description": "Réparation et éclat naturel, pour tout types de peau",
-    "type": "Soins du visage",
+    "type": "Nos Soins du visage",
     "prices": {
       "30m": null,
       "1h": 82,
@@ -121,14 +131,142 @@
     }
   },
   {
-    "title": "Epilation cire orientale (sucre)",
-    "description": "Méthode traditionnelle et naturelle pour une peau douce et soyeuse.",
+    "title": "Jambes entière",
+    "description": "Pour les femmes - Jambes entière",
     "type": "Epilation cire orientale (sucre)",
-    "prices": {
-      "30m": 25,
-      "1h": 45,
-      "1h30": 65
-    }
+    "prices": { "30m": null, "1h": 29, "1h30": null }
+  },
+  {
+    "title": "Cuisses ou demi-jambes",
+    "description": "Pour les femmes - Cuisses ou demi-jambes",
+    "type": "Epilation cire orientale (sucre)",
+    "prices": { "30m": null, "1h": 23, "1h30": null }
+  },
+  {
+    "title": "Aisselles",
+    "description": "Pour les femmes - Aisselles",
+    "type": "Epilation cire orientale (sucre)",
+    "prices": { "30m": null, "1h": 15, "1h30": null }
+  },
+  {
+    "title": "Maillot simple",
+    "description": "Pour les femmes - Maillot simple",
+    "type": "Epilation cire orientale (sucre)",
+    "prices": { "30m": null, "1h": 15, "1h30": null }
+  },
+  {
+    "title": "Maillot semi-intégral",
+    "description": "Pour les femmes - Maillot semi-intégral",
+    "type": "Epilation cire orientale (sucre)",
+    "prices": { "30m": null, "1h": 27, "1h30": null }
+  },
+  {
+    "title": "Maillot intégral",
+    "description": "Pour les femmes - Maillot intégral",
+    "type": "Epilation cire orientale (sucre)",
+    "prices": { "30m": null, "1h": 35, "1h30": null }
+  },
+  {
+    "title": "Avant-bras",
+    "description": "Pour les femmes - Avant-bras",
+    "type": "Epilation cire orientale (sucre)",
+    "prices": { "30m": null, "1h": 23, "1h30": null }
+  },
+  {
+    "title": "Sourcils",
+    "description": "Pour les femmes - Sourcils",
+    "type": "Epilation cire orientale (sucre)",
+    "prices": { "30m": null, "1h": 12, "1h30": null }
+  },
+  {
+    "title": "Remodeling sourcils",
+    "description": "Pour les femmes - Remodeling sourcils",
+    "type": "Epilation cire orientale (sucre)",
+    "prices": { "30m": null, "1h": 20, "1h30": null }
+  },
+  {
+    "title": "Menton",
+    "description": "Pour les femmes - Menton",
+    "type": "Epilation cire orientale (sucre)",
+    "prices": { "30m": null, "1h": 10, "1h30": null }
+  },
+  {
+    "title": "Lèvres",
+    "description": "Pour les femmes - Lèvres",
+    "type": "Epilation cire orientale (sucre)",
+    "prices": { "30m": null, "1h": 10, "1h30": null }
+  },
+  {
+    "title": "Visage entier",
+    "description": "Pour les femmes - Visage entier",
+    "type": "Epilation cire orientale (sucre)",
+    "prices": { "30m": null, "1h": 25, "1h30": null }
+  },
+  {
+    "title": "Bras entier",
+    "description": "Pour les femmes - Bras entier",
+    "type": "Epilation cire orientale (sucre)",
+    "prices": { "30m": null, "1h": 29, "1h30": null }
+  },
+  {
+    "title": "Fessier",
+    "description": "Pour les femmes - Fessier",
+    "type": "Epilation cire orientale (sucre)",
+    "prices": { "30m": null, "1h": 19, "1h30": null }
+  },
+  {
+    "title": "Sillon interfessier",
+    "description": "Pour les femmes - Sillon interfessier",
+    "type": "Epilation cire orientale (sucre)",
+    "prices": { "30m": null, "1h": 15, "1h30": null }
+  },
+  {
+    "title": "Jambes/Bras/Dos",
+    "description": "Pour les hommes - Jambes/Bras/Dos",
+    "type": "Epilation cire orientale (sucre)",
+    "prices": { "30m": null, "1h": 45, "1h30": null }
+  },
+  {
+    "title": "Aisselles",
+    "description": "Pour les hommes - Aisselles",
+    "type": "Epilation cire orientale (sucre)",
+    "prices": { "30m": null, "1h": 20, "1h30": null }
+  },
+  {
+    "title": "Sourcils/épaules",
+    "description": "Pour les hommes - Sourcils/épaules",
+    "type": "Epilation cire orientale (sucre)",
+    "prices": { "30m": null, "1h": 20, "1h30": null }
+  },
+  {
+    "title": "Jambes entières",
+    "description": "Pour les hommes - Jambes entières",
+    "type": "Epilation cire orientale (sucre)",
+    "prices": { "30m": null, "1h": 45, "1h30": null }
+  },
+  {
+    "title": "Demi-bras",
+    "description": "Pour les hommes - Demi-bras",
+    "type": "Epilation cire orientale (sucre)",
+    "prices": { "30m": null, "1h": 25, "1h30": null }
+  },
+  {
+    "title": "Torse",
+    "description": "Pour les hommes - Torse",
+    "type": "Epilation cire orientale (sucre)",
+    "prices": { "30m": null, "1h": 40, "1h30": null }
+  },
+  {
+    "title": "Maillot simple",
+    "description": "Pour les hommes - Maillot simple",
+    "type": "Epilation cire orientale (sucre)",
+    "prices": { "30m": null, "1h": 35, "1h30": null }
+  },
+  {
+    "title": "Maillot intégral",
+    "description": "Pour les hommes - Maillot intégral",
+    "type": "Epilation cire orientale (sucre)",
+    "prices": { "30m": null, "1h": 60, "1h30": null }
   },
   {
     "title": "Teinture des cils et sourcils",
@@ -136,6 +274,16 @@
     "type": "Teinture des cils et sourcils",
     "prices": {
       "30m": 20,
+      "1h": null,
+      "1h30": null
+    }
+  },
+  {
+    "title": "Teinture des cils ou sourcils",
+    "description": "Intensifie le regard pour une durée de 3 à 4 semaines.",
+    "type": "Teinture des cils et sourcils",
+    "prices": {
+      "30m": 37,
       "1h": null,
       "1h30": null
     }

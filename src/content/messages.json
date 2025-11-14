@@ -2,7 +2,8 @@
   "navbar": {
     "services": "Soins",
     "pricing": "Infos et tarifs",
-    "book": "Réserver"
+    "book": "Réserver",
+    "href" : "/booking"
   },
 
   "landing": {
@@ -12,7 +13,8 @@
         { "type": "highlight", "value": "Votre institut de beauté & salon de massage traditionnel thaïlandais à Paris " },
         { "type": "text", "value": "où se rencontrent bien-être et tradition pour une expérience unique." }
       ],
-      "button": "Réserver"
+      "button": "Réserver",
+      "href" : "/booking"
     },
   
     "features": {
@@ -41,8 +43,9 @@
     "section_intro": {
       "title": "L’Art du Bien-Être Thaïlandais",
       "description": "Votre moment de détente et de bien-être commence ici.",
+      "button": "Réserver",
+        "href": "/booking",
       "cards": {
-        "button": "Réserver",
         "1": {
           "type": "Massages",
           "title": "Massage Thaï Traditionnel",
@@ -81,6 +84,7 @@
 
     "services": {
       "button": "Découvrir",
+      "href" : "/services",
       "1": {
         "title": "Massage Thaïlandais",
         "description": [
@@ -88,7 +92,8 @@
           { "type": "highlight", "value": "institut de beauté à Paris" },
           { "type": "text", "value": ". Grâce à des pressions et étirements précis, cette technique ancestrale soulage les tensions et rééquilibre l’énergie du corps." }
         ],
-        "image": "/images/massage.jpg"
+        "image": "/images/massage.jpg",
+        "slug": "/massage"
       },
       "2": {
         "title": "Epilation cire orientale (sucre)",
@@ -97,14 +102,16 @@
           { "type": "highlight", "value": "institut de beauté à Paris " },
           { "type": "text", "value": "pour une expérience tout en confort." }
         ],
-        "image": "/images/cire-orientae.png"
+        "image": "/images/cire-orientae.png",
+        "slug": "/gommage"
       },
       "3": {
         "title": "Soins du visage",
         "description": [
           { "type": "text", "value": "Offrez à votre peau un éclat naturel avec nos soins experts. Adaptés à tous les types de peau, ils hydratent, purifient et régénèrent en profondeur pour un teint lumineux."}
         ],
-        "image": "/images/soin-du-visage.png"
+        "image": "/images/soin-du-visage.png",
+        "slug": "/teinture"
       },
       "4": {
         "title": "Teinture des cils et sourcils",
@@ -113,14 +120,16 @@
           { "type": "highlight", "value": "institut de beauté à Paris, " },
           { "type": "text", "value": "nos experts subliment vos cils et sourcils pour un effet naturel et longue durée."}
         ],
-        "image": "/images/teinture.png"
+        "image": "/images/teinture.png",
+        "slug": "/cire-orientale"
       },
       "5": {
         "title": "Gommages",
         "description": [
           { "type": "text", "value": "Exfoliez votre peau en douceur avec nos soins purifiants. En éliminant les impuretés et les cellules mortes, votre peau retrouve douceur, éclat et souplesse."}
         ],
-        "image": "/images/gommage.png"
+        "image": "/images/gommage.png",
+        "slug": "/soin-du-visage"
       }
     },
 
@@ -141,10 +150,9 @@
 
   "info": {
     "title": "Infos et tarifs",
-    "search": "Search ... ",
     "loadMore": "Charger plus", 
     "types": [
-      "Massage", "Gommages", "Soins du visage", "Epilation cire orientale (sucre)", "Teinture des cils et sourcils"
+      "Massage", "Nos Gommages", "Nos Soins du visage", "Epilation cire orientale (sucre)", "Teinture des cils et sourcils"
     ]
   },
 

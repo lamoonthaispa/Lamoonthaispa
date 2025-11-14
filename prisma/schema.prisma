@@ -1,0 +1,52 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Booking {
+  id           Int       @id @default(autoincrement())
+  slot         DateTime  @db.Timestamp(6)
+  duration     Int
+  massageType  String    @db.VarChar(64)
+  name         String    @db.VarChar(191)
+  email        String    @db.VarChar(191)
+  phone        String    @db.VarChar(32)
+  notes        String?   @db.VarChar(255)
+  createdAt    DateTime  @default(now()) @db.Timestamp(6)
+  updatedAt    DateTime  @updatedAt @db.Timestamp(6)
+
+  paymentTransaction PaymentTransaction? // optional
+
+  @@index([slot])
+  @@index([massageType])
+  @@index([createdAt])
+}
+
+// recently added please make sure this schema work well with the booking model
+model PaymentTransaction {
+  id         Int      @id @default(autoincrement())
+  fullname   String
+  address    String
+  order_id   String   @db.VarChar(191)
+  session_id String   @db.VarChar(191)
+  status     String   @db.VarChar(32)
+  createdAt  DateTime @default(now()) @db.Timestamp(6)
+  updatedAt  DateTime @updatedAt @db.Timestamp(6)
+
+   bookingId  Int? @unique       // optional foreign key
+  booking    Booking?    @relation(fields: [bookingId], references: [id])
+
+  @@index([order_id])
+  @@index([session_id])
+  @@index([createdAt])
+}

@@ -7,6 +7,9 @@ export type MockCard = {
     "45m"?: number | null;
     "1h"?: number | null;
     "1h30"?: number | null;
+    "5h"?:number | null;
+    "10h"?:number | null;
+    "15h"?:number | null;
   };
 };
 

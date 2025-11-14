@@ -1,6 +1,6 @@
 "use client";
-
 import { useMemo } from "react";
+import { useSearchParams } from "next/navigation";
 import Promotion from "@/components/Promotion";
 import Header from "../components/Header";
 import ServiceCards from "../components/ServiceCards";
@@ -10,48 +10,56 @@ import type { MockCard } from "@/lib/mockCards";
 
 export default function InfoPage() {
   const { cards: mockCards } = useMockCards();
+  const searchParams = useSearchParams();
+  const queryType = searchParams.get("type")?.toLowerCase().trim();
 
-  // Get all unique service types from messages
-  const serviceTypes = messages.info.types
-
-  // Group cards by type with flexible matching
-  const cardsByType = useMemo(() => {
-    const normalize = (value: string) => value.toLowerCase().trim();
-
-    return serviceTypes.map((type) => {
-      const typeLower = normalize(type);
-
-      const matchingCards = mockCards.filter((card: MockCard) => {
-        const cardTypeLower = normalize(card.type);
-
-        if (cardTypeLower === typeLower) return true;
-        if (cardTypeLower === `${typeLower}s` || `${cardTypeLower}s` === typeLower) return true;
-        if (cardTypeLower.includes(typeLower) || typeLower.includes(cardTypeLower)) return true;
-
-        return false;
-      });
-
-      return {
-        type,
-        cards: matchingCards,
-      };
+  // สร้าง mapping type lowercase -> original
+  const typeMapping = useMemo(() => {
+    const mapping: Record<string, string> = {};
+    mockCards.forEach((card) => {
+      mapping[card.type.toLowerCase()] = card.type;
     });
-  }, [mockCards, serviceTypes]);
+    return mapping;
+  }, [mockCards]);
+
+  const filteredType = queryType ? typeMapping[queryType] : null;
+
+  // กรองการ์ดตาม query
+  const filteredCards = useMemo(() => {
+    if (!filteredType) return mockCards;
+    return mockCards.filter((card: MockCard) => card.type === filteredType);
+  }, [mockCards, filteredType]);
+
+  // จัดกลุ่มการ์ดตาม type (เมื่อไม่มี query)
+  const groupedCards = useMemo(() => {
+    if (filteredType) return null; // ถ้ามี query ไม่ต้องจัดกลุ่ม
+
+    const groups: Record<string, MockCard[]> = {};
+    mockCards.forEach((card) => {
+      if (!groups[card.type]) {
+        groups[card.type] = [];
+      }
+      groups[card.type].push(card);
+    });
+    return groups;
+  }, [mockCards, filteredType]);
 
   return (
     <main className="flex flex-col bg-background">
       <Promotion />
       <Header />
-      
-      {cardsByType.map(({ type, cards }) => (
-        cards.length > 0 && (
-          <ServiceCards
-            key={type}
-            serviceType={type}
-            cards={cards}
-          />
-        )
-      ))}
+
+      {/* กรณีมี ?type=... แสดงเฉพาะกลุ่มนั้น */}
+      {filteredType ? (
+        <ServiceCards serviceType={filteredType} cards={filteredCards} />
+      ) : (
+        /* กรณีไม่มี query แสดงทุกกลุ่ม */
+        <div className="space-y-12">
+          {Object.entries(groupedCards || {}).map(([type, cards]) => (
+            <ServiceCards key={type} serviceType={type} cards={cards} />
+          ))}
+        </div>
+      )}
     </main>
-  )
+  );
 }

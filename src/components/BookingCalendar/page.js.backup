@@ -1,0 +1,416 @@
+"use client";
+
+import React, { useState, useMemo } from "react";
+
+// Icons for controls (remains unchanged)
+const ArrowLeftIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="h-6 w-6"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M15 19l-7-7 7-7"
+    />
+  </svg>
+);
+const ArrowRightIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="h-6 w-6"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M9 5l7 7-7 7"
+    />
+  </svg>
+);
+const ZoomInIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="h-6 w-6"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
+    />
+  </svg>
+);
+const ZoomOutIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="h-6 w-6"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM13 10H7"
+    />
+  </svg>
+);
+
+// --- Helper Functions ---
+export const getWeekDays = (date) => {
+  const startOfWeek = new Date(date);
+  startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay()); // Start from Sunday
+  return Array.from({ length: 7 }, (_, i) => {
+    const day = new Date(startOfWeek);
+    day.setDate(day.getDate() + i);
+    return day;
+  });
+};
+
+const DEFAULT_ZOOM_LEVELS = {
+  1: { interval: 60, label: "60 นาที", rowHeight: "h-20" },
+  2: { interval: 30, label: "30 นาที", rowHeight: "h-12" },
+  3: { interval: 15, label: "15 นาที", rowHeight: "h-10" },
+};
+
+/**
+ * Reusable Booking Calendar Component
+ */
+const BookingCalendar = ({
+  initialDate = new Date(),
+  bookedSlots = {}, // Changed from array to object: { 'isoString': count }
+  bookingLimit = 1, // New prop to set max bookings per slot
+  onSlotClick = () => {},
+  selectedSlot = null,
+  startTime = 8,
+  endTime = 18,
+  zoomLevelsConfig = DEFAULT_ZOOM_LEVELS,
+}) => {
+  const [currentDate, setCurrentDate] = useState(initialDate);
+  const [zoomLevel, setZoomLevel] = useState(1);
+
+  const MIN_ZOOM = 1;
+  const MAX_ZOOM = Object.keys(zoomLevelsConfig).length;
+
+  const handlePrevWeek = () =>
+    setCurrentDate(
+      (prev) => new Date(new Date(prev).setDate(prev.getDate() - 7))
+    );
+  const handleNextWeek = () =>
+    setCurrentDate(
+      (prev) => new Date(new Date(prev).setDate(prev.getDate() + 7))
+    );
+  const handleZoomIn = () =>
+    setZoomLevel((prev) => Math.min(prev + 1, MAX_ZOOM));
+  const handleZoomOut = () =>
+    setZoomLevel((prev) => Math.max(prev - 1, MIN_ZOOM));
+
+  const getSlotStatus = (date) => {
+    const count = bookedSlots[date.toISOString()] || 0;
+    const isFull = count >= bookingLimit;
+    const isBooked = count > 0;
+    return { count, isBooked, isFull };
+  };
+
+  const internalSlotClickHandler = (day, hour, minute) => {
+    const clickedDate = new Date(day);
+    clickedDate.setHours(hour, minute, 0, 0);
+
+    if (getSlotStatus(clickedDate).isFull) return;
+
+    onSlotClick(clickedDate);
+  };
+
+  const weekDays = useMemo(() => getWeekDays(currentDate), [currentDate]);
+
+  const timeSlots = useMemo(() => {
+    const slots = [];
+    const { interval } = zoomLevelsConfig[zoomLevel];
+    const startTimeInMinutes = startTime * 60;
+    const endTimeInMinutes = endTime * 60;
+
+    for (
+      let minutes = startTimeInMinutes;
+      minutes < endTimeInMinutes;
+      minutes += interval
+    ) {
+      slots.push({
+        hour: Math.floor(minutes / 60),
+        minute: minutes % 60,
+      });
+    }
+    return slots;
+  }, [zoomLevel, startTime, endTime, zoomLevelsConfig]);
+
+  const formatWeekHeader = (week) => {
+    const firstDay = week[0];
+    const lastDay = week[6];
+    const monthNames = [
+      "ม.ค.",
+      "ก.พ.",
+      "มี.ค.",
+      "เม.ย.",
+      "พ.ค.",
+      "มิ.ย.",
+      "ก.ค.",
+      "ส.ค.",
+      "ก.ย.",
+      "ต.ค.",
+      "พ.ย.",
+      "ธ.ค.",
+    ];
+    if (firstDay.getMonth() === lastDay.getMonth()) {
+      return `${firstDay.getDate()} - ${lastDay.getDate()} ${
+        monthNames[firstDay.getMonth()]
+      } ${firstDay.getFullYear() + 543}`;
+    }
+    return `${firstDay.getDate()} ${
+      monthNames[firstDay.getMonth()]
+    } - ${lastDay.getDate()} ${monthNames[lastDay.getMonth()]} ${
+      lastDay.getFullYear() + 543
+    }`;
+  };
+
+  const today = new Date();
+  const currentZoomConfig = zoomLevelsConfig[zoomLevel];
+
+  return (
+    <div className="bg-white p-4 sm:p-6 rounded-2xl shadow-lg w-full">
+      <div className="flex flex-col sm:flex-row items-center justify-between mb-6 gap-4">
+        <div className="flex items-center gap-2">
+          <button
+            onClick={handlePrevWeek}
+            className="p-2 rounded-full hover:bg-gray-200 transition-colors"
+          >
+            <ArrowLeftIcon />
+          </button>
+          <button
+            onClick={handleNextWeek}
+            className="p-2 rounded-full hover:bg-gray-200 transition-colors"
+          >
+            <ArrowRightIcon />
+          </button>
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-800 text-center ml-4">
+            {formatWeekHeader(weekDays)}
+          </h2>
+        </div>
+        <div className="flex items-center gap-2 border border-gray-300 rounded-full p-1">
+          <button
+            onClick={handleZoomOut}
+            disabled={zoomLevel === MIN_ZOOM}
+            className="p-2 rounded-full hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <ZoomOutIcon />
+          </button>
+          <span className="w-20 text-center text-gray-600 font-semibold">
+            {currentZoomConfig.label}
+          </span>
+          <button
+            onClick={handleZoomIn}
+            disabled={zoomLevel === MAX_ZOOM}
+            className="p-2 rounded-full hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <ZoomInIcon />
+          </button>
+        </div>
+      </div>
+
+      <div className="overflow-auto" style={{ maxHeight: "65vh" }}>
+        <div className="grid grid-cols-[auto_repeat(7,1fr)] min-w-[50rem]">
+          <div className="sticky top-0 left-0 bg-white -z-10"></div>
+
+          {weekDays.map((day, index) => {
+            const isToday = day.toDateString() === today.toDateString();
+            return (
+              <div
+                key={index}
+                className="text-center p-2 border-b-2 border-gray-200 sticky top-0 bg-white z-10"
+              >
+                <p
+                  className={`text-sm ${
+                    isToday ? "text-blue-600" : "text-gray-500"
+                  }`}
+                >
+                  {["อา", "จ", "อ", "พ", "พฤ", "ศ", "ส"][day.getDay()]}
+                </p>
+                <p
+                  className={`text-2xl font-bold ${
+                    isToday
+                      ? "text-blue-600 bg-blue-100 rounded-full w-10 h-10 flex items-center justify-center mx-auto"
+                      : "text-gray-800"
+                  }`}
+                >
+                  {day.getDate()}
+                </p>
+              </div>
+            );
+          })}
+
+          {timeSlots.map(({ hour, minute }) => (
+            <React.Fragment key={`${hour}-${minute}`}>
+              <div className="text-right pr-2 text-xs text-gray-500 -mt-2 sticky left-0 bg-white z-10">
+                {`${hour}:${String(minute).padStart(2, "0")}`}
+              </div>
+
+              {weekDays.map((day) => {
+                const slotDate = new Date(day);
+                slotDate.setHours(hour, minute, 0, 0);
+                const status = getSlotStatus(slotDate);
+                const isSelected =
+                  selectedSlot?.getTime() === slotDate.getTime();
+
+                const slotClasses = [
+                  "border-t border-r border-gray-200 flex items-center justify-center text-xs text-gray-600",
+                  currentZoomConfig.rowHeight,
+                  isSelected
+                    ? "bg-blue-500 !text-white ring-2 ring-blue-700 z-10"
+                    : status.isFull
+                    ? "bg-red-100 !text-red-700 cursor-not-allowed"
+                    : status.isBooked
+                    ? "bg-yellow-100 hover:bg-blue-50 cursor-pointer"
+                    : "hover:bg-blue-50 cursor-pointer",
+                ].join(" ");
+
+                return (
+                  <div
+                    key={day.toISOString()}
+                    className={slotClasses.trim()}
+                    onClick={() => internalSlotClickHandler(day, hour, minute)}
+                  >
+                    {status.isBooked && (
+                      <span>
+                        {status.isFull ? "เต็ม" : "ว่าง"} {status.count}/
+                        {bookingLimit}
+                      </span>
+                    )}
+                  </div>
+                );
+              })}
+            </React.Fragment>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+export default BookingCalendar;
+/**
+ * Example Page: HomePage
+ */
+// export default function HomePage() {
+//   const [selectedSlot, setSelectedSlot] = useState(null);
+//   const BOOKING_LIMIT_PER_SLOT = 2; // Set booking limit here
+
+//   const [bookedSlots, setBookedSlots] = useState(() => {
+//     const today = new Date();
+//     const weekDays = getWeekDays(today);
+//     // New data structure: { isoString: count }
+//     return {
+//       [new Date(
+//         today.getFullYear(),
+//         today.getMonth(),
+//         weekDays[2].getDate(),
+//         10,
+//         30,
+//         0
+//       ).toISOString()]: 1,
+//       [new Date(
+//         today.getFullYear(),
+//         today.getMonth(),
+//         weekDays[3].getDate(),
+//         14,
+//         0,
+//         0
+//       ).toISOString()]: 2, // This one is full
+//       [new Date(
+//         today.getFullYear(),
+//         today.getMonth(),
+//         weekDays[3].getDate(),
+//         14,
+//         15,
+//         0
+//       ).toISOString()]: 1,
+//     };
+//   });
+
+//   const handleSlotSelect = (slotDate) => {
+//     console.log("Slot selected in parent:", slotDate);
+//     setSelectedSlot(slotDate);
+//   };
+
+//   const handleConfirmBooking = () => {
+//     if (!selectedSlot) return;
+
+//     const slotIso = selectedSlot.toISOString();
+//     const currentCount = bookedSlots[slotIso] || 0;
+
+//     if (currentCount >= BOOKING_LIMIT_PER_SLOT) {
+//       alert("ขออภัย ช่องเวลานี้เต็มแล้ว");
+//       return;
+//     }
+
+//     setBookedSlots((prevSlots) => ({
+//       ...prevSlots,
+//       [slotIso]: currentCount + 1,
+//     }));
+
+//     setSelectedSlot(null); // Clear selection after booking
+//     alert(
+//       `ยืนยันการจองเวลา: ${selectedSlot.toLocaleString("th-TH")} เรียบร้อยแล้ว`
+//     );
+//   };
+
+//   return (
+//     <main className="bg-gray-100 min-h-screen flex flex-col items-center justify-center p-4">
+//       <div className="w-full max-w-7xl mx-auto">
+//         <h1 className="text-3xl sm:text-4xl font-bold text-center text-gray-800 mb-2">
+//           ระบบจองแบบหลายคิว
+//         </h1>
+//         <p className="text-center text-gray-600 mb-8">
+//           สามารถจองได้สูงสุด {BOOKING_LIMIT_PER_SLOT} คิวต่อ 1 ช่องเวลา
+//         </p>
+
+//         <BookingCalendar
+//           bookedSlots={bookedSlots}
+//           bookingLimit={BOOKING_LIMIT_PER_SLOT}
+//           onSlotClick={handleSlotSelect}
+//           selectedSlot={selectedSlot}
+//         />
+
+//         {selectedSlot && (
+//           <div className="mt-6 p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
+//             <p className="font-semibold text-blue-800">ช่องเวลาที่เลือก:</p>
+//             <p className="text-lg text-blue-700">
+//               {selectedSlot.toLocaleString("th-TH", {
+//                 weekday: "long",
+//                 year: "numeric",
+//                 month: "long",
+//                 day: "numeric",
+//                 hour: "2-digit",
+//                 minute: "2-digit",
+//               })}
+//             </p>
+//             <button
+//               onClick={handleConfirmBooking}
+//               className="mt-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+//             >
+//               ยืนยันการจอง
+//             </button>
+//           </div>
+//         )}
+//       </div>
+//     </main>
+//   );
+// }
