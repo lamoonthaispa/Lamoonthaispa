@@ -8,6 +8,8 @@ import {
   SITE_URL
 } from "@/lib/seo";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: INFO_PAGE_TITLE,
   description: INFO_PAGE_DESCRIPTION,
