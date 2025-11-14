@@ -1,8 +1,8 @@
-import { Search, SlidersHorizontal } from 'lucide-react'
+/* import { Search, SlidersHorizontal } from 'lucide-react'
 import messages from '@/content/messages.json'
 
 export default function SearchBox() {
-  const searchPlaceholder = messages.info.search
+  const searchPlaceholder = messages.info.search 
   return (
     <form role="search" className='flex justify-between items-center bg-info-search-background gap-2 py-3 px-4 rounded-lg'>
       <label htmlFor="info-search" className="sr-only">
@@ -21,4 +21,4 @@ export default function SearchBox() {
       </button>
     </form>
   )
-}
+} */
