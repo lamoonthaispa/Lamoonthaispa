@@ -1,3 +1,4 @@
+"use client";
 import type { Metadata } from "next";
 import InfoPage from "@/features/info/pages/Info";
 import {
