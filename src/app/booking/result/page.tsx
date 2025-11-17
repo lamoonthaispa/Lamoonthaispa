@@ -33,18 +33,19 @@ function BookingResultContent() {
   const [status, setStatus] = useState<"loading" | "success" | "fail">("loading");
   const [bookingData, setBookingData] = useState<any>(null);
 
-  const formatDate = (iso) =>
+  const formatDate = (iso: string | null) =>
     iso && !isNaN(new Date(iso).getTime())
       ? new Date(iso).toLocaleDateString("fr-FR")
       : "—";
-
-  const formatTime = (iso) =>
+  
+  const formatTime = (iso: string | null) =>
     iso && !isNaN(new Date(iso).getTime())
       ? new Date(iso).toLocaleTimeString("fr-FR", {
           hour: "2-digit",
           minute: "2-digit",
         })
       : "—";
+  
 
   useEffect(() => {
     if (result === "success") {
