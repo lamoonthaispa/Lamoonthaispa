@@ -24,10 +24,10 @@ const SERVICE_DETAIL_KEY_MAP: Record<string, keyof typeof messages.services_deta
 
 const SERVICE_TYPE_CARD_LABEL: Record<string, string> = {
   massage: "Massages",
-  gommage: "Gommages",
+  gommage: "Nos Gommages",
   teinture: "Teinture des cils et sourcils",
   "cire-orientale": "Epilation cire orientale (sucre)",
-  "soin-du-visage": "Soins du visage",
+  "soin-du-visage": "Nos Soins du visage",
 };
 
 export default function ServiceTypePage({

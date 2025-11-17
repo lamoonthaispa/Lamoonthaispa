@@ -55,7 +55,7 @@
             { "time": "1h", "price": "75€" },
             { "time": "1h30", "price": "100€" }
           ],
-          "image": "/images/card-mock.jpg"
+          "image": "/images/massage.jpg"
         },
         "2": {
           "type": "Gommages",
@@ -66,7 +66,7 @@
             { "time": "1h", "price": "99€" },
             { "time": "1h30", "price": "139€" }
           ],
-          "image": "/images/card-mock.jpg"
+          "image": "/images/gommage.png"
         },
         "3": {
           "type": "Massages",
@@ -77,7 +77,7 @@
             { "time": "1h", "price": "-" },
             { "time": "1h30", "price": "-" }
           ],
-          "image": "/images/card-mock.jpg"
+          "image": "/images/massage.jpg"
         }
       }
     },
@@ -103,7 +103,7 @@
           { "type": "text", "value": "pour une expérience tout en confort." }
         ],
         "image": "/images/cire-orientae.png",
-        "slug": "/gommage"
+        "slug": "/cire-orientale"
       },
       "3": {
         "title": "Soins du visage",
@@ -111,7 +111,7 @@
           { "type": "text", "value": "Offrez à votre peau un éclat naturel avec nos soins experts. Adaptés à tous les types de peau, ils hydratent, purifient et régénèrent en profondeur pour un teint lumineux."}
         ],
         "image": "/images/soin-du-visage.png",
-        "slug": "/teinture"
+        "slug": "/soin-du-visage"
       },
       "4": {
         "title": "Teinture des cils et sourcils",
@@ -121,7 +121,7 @@
           { "type": "text", "value": "nos experts subliment vos cils et sourcils pour un effet naturel et longue durée."}
         ],
         "image": "/images/teinture.png",
-        "slug": "/cire-orientale"
+        "slug": "/teinture"
       },
       "5": {
         "title": "Gommages",
@@ -129,7 +129,7 @@
           { "type": "text", "value": "Exfoliez votre peau en douceur avec nos soins purifiants. En éliminant les impuretés et les cellules mortes, votre peau retrouve douceur, éclat et souplesse."}
         ],
         "image": "/images/gommage.png",
-        "slug": "/soin-du-visage"
+        "slug": "/gommage"
       }
     },
 
