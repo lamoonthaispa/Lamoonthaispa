@@ -20,9 +20,8 @@ export async function GET(req) {
       email: b.email,
       phone: b.phone,
       notes: b.notes || '',
-      createdAt: b.createdAt.toISOString(),
-      paymentStatus: b.paymentTransaction?.status || '',
-      orderId: b.paymentTransaction?.order_id || '',
+      paymentStatus: b.paymentTransaction?.status || 'Complete',
+      orderId: b.paymentTransaction?.order_id || 'Complete',
     }));
 
     return new Response(JSON.stringify(response), {
